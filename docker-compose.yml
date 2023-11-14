@@ -1,0 +1,22 @@
+version: "3.5"
+
+services:
+
+  sparql_search:
+    image: sparql_search_service:latest
+    build:
+      context: sparql_search_service
+    ports:
+      - 8003:8080
+    networks:
+      - sparql_search_service_net
+    volumes:
+      - ./sparql_search_service/:/app/
+      - /etc/timezone:/etc/timezone:ro 
+      - /etc/localtime:/etc/localtime:ro
+    restart: always
+
+networks:
+  sparql_search_service_net:
+    name: sparql_search_service_net
+    driver: bridge
